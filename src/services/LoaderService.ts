@@ -18,8 +18,9 @@ export class LoaderService {
             if(stat.isDirectory()) {
                 await this.loadEvents(client, path.join(dir, file));
             }
-            if(file.endsWith('.js')) {
-                const Listener = require(path.join(filePath, file));
+            if(file.endsWith('.ts')) {
+                let Listener = await import(path.join(filePath, file));
+                Listener = Listener[Object.keys(Listener)[0]]
                 if(Listener.prototype instanceof PixelEvent) {
                     const listener = new Listener();
                     client.events.set(listener.name, listener);
@@ -37,8 +38,9 @@ export class LoaderService {
             if(stat.isDirectory()) {
                 await this.loadCommands(client, path.join(dir, file));
             }
-            if(file.endsWith('.js')) {
-                const Command = require(path.join(filePath, file));
+            if(file.endsWith('.ts')) {
+                let Command = await import(path.join(filePath, file));
+                Command = Command[Object.keys(Command)[0]]
                 if(Command.prototype instanceof PixelCommand) {
                     const cmd = new Command();
                     client.commands.set(cmd.name, cmd);

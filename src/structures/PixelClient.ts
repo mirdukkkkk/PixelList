@@ -3,11 +3,14 @@ import { Client, ClientOptions, Collection } from "discord.js";
 import { MongoClient } from "mongodb";
 import { LoaderService } from "../services/LoaderService";
 
+import { PixelEvent } from "./PixelEvent";
+import { PixelCommand } from "./PixelCommand";
+
 export class PixelClient extends Client {
     readonly settings;
     readonly mongo;
-    commands = new Collection();
-    events = new Collection();
+    readonly commands: Collection<string, PixelCommand> = new Collection();
+    readonly events: Collection<string, PixelEvent> = new Collection();
 
     constructor(options: ClientOptions) {
         super(options);
@@ -19,7 +22,7 @@ export class PixelClient extends Client {
         return this.mongo.db('stable');
     }
 
-    async _start() {
+    async _start(): Promise<string> {
         await this.mongo.connect();
         await LoaderService.loadEvents(this, '../events');
         await LoaderService.loadCommands(this, '../commands');

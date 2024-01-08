@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "init": "npx tsc --init",
-    "build": "tsc --project tsconfig.json"
+    "init": "tsc --init",
+    "build": "tsc --project tsconfig.json",
+    "test": "ts-node ./src/index.ts",
+    "prod": "node ./dist/index.js",
+    "load": "ts-node ./scripts/loadCommands.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +18,7 @@
     "mongodb": "^6.3.0"
   },
   "devDependencies": {
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }
