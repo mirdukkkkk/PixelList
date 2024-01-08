@@ -6,5 +6,5 @@ export abstract class PixelEvent implements PixelEventInterface {
         this.name = name;
     }
 
-    abstract run(client: PixelClient, ...params: any): Promise<any> | Promise<void> | any | void;
+    abstract run(client: PixelClient, ...params: any): any;
 }

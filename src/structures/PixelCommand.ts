@@ -16,5 +16,5 @@ export abstract class PixelCommand implements PixelCommandInterface {
         }
     }
 
-    abstract run(interaction: CommandInteraction): Promise<any> | Promise<void> | any | void;
+    abstract run(interaction: CommandInteraction): any;
 }

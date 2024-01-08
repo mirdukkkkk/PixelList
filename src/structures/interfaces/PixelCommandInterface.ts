@@ -8,7 +8,7 @@ export interface PixelCommandInterface {
     };
     permissions?: PermissionsInterface;
 
-    run(interaction: CommandInteraction): Promise<any> | Promise<void> | any | void;
+    run(interaction: CommandInteraction): any;
 }
 
 export interface PermissionsInterface {
